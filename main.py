@@ -101,8 +101,10 @@ def generate_report(config_file, start_date, end_date, report_name=None):
 
     print(f"El reporte ha sido generado en {output_file}")
     
+    # Obtener los tipos de items del reporte
+    item_types = list(config['ITEM_KEYS'].keys())
     # Enviar el reporte por correo electrónico
-    send_email(config, output_file)
+    send_email(config, output_file, start_date, end_date, item_types)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generar reporte de Zabbix")
