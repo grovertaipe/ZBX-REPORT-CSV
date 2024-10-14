@@ -1,0 +1,40 @@
+{
+    "ZABBIX_URL": "http://tu_servidor_zabbix/api_jsonrpc.php",
+    "AUTH_TOKEN": "tu_token_de_autenticacion_zabbix",
+    "ITEM_KEYS": {
+        "filesystem": {
+            "percent": "vfs.fs.size[*,pused]",
+            "used": "vfs.fs.size[*,used]"
+        },
+        "memory": {
+            "percent": "vm.memory.util",
+            "used": "vm.memory.size[used]"
+        },
+        "cpu": {
+            "percent": "system.cpu.util"
+        }
+    },
+    "HOST_TAGS": [
+        {"tag": "cliente", "value": "monitoreo", "operator": 1},
+        {"tag": "os", "value": "linux", "operator": 1}
+    ],
+    "CSV_FIELDS": [
+        "Host ID", "Nombre", "Dirección IP", "Tipo", "Nombre Item", 
+        "Porcentaje Utilizado", "Espacio Usado", 
+        "Promedio Porcentaje", "Mínimo Porcentaje", "Máximo Porcentaje",
+        "Promedio Usado", "Mínimo Usado", "Máximo Usado"
+    ],
+    "default_report_name": "zabbix_report",
+    "email": {
+        "sender": "tu_correo@tudominio.com",
+        "recipients": ["destinatario1@ejemplo.com", "destinatario2@ejemplo.com"],
+        "subject": "Reporte de Zabbix",
+        "body": "Adjunto encontrarás el reporte de Zabbix generado.",
+        "smtp_server": "smtp.tudominio.com",
+        "smtp_port": 587,
+        "use_tls": true,
+        "use_authentication": true,
+        "username": "tu_usuario@tudominio.com",
+        "password": "tu_contraseña_segura"
+    }
+}
