@@ -29,7 +29,7 @@
         "sender": "tu_correo@tudominio.com",
         "recipients": ["destinatario1@ejemplo.com", "destinatario2@ejemplo.com"],
         "cc": ["destinatario1@ejemplo.com", "destinatario2@ejemplo.com"],
-        "subject": "Reporte de Zabbix - {start_date} a {end_date}",
+        "subject": "Reporte de Zabbix - Cliente {client} - {start_date} a {end_date}",
         "body": "Estimado/a,\n\nAdjunto encontrarás el reporte de Zabbix generado para el período del {start_date} al {end_date}.\n\nEste reporte incluye información sobre {item_types} para los hosts monitoreados.\n\nSi tienes alguna pregunta o necesitas información adicional, no dudes en contactarnos.\n\nSaludos cordiales,\nEquipo de Monitoreo",
         "smtp_server": "smtp.tudominio.com",
         "smtp_port": 587,
