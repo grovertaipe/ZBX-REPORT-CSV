@@ -14,10 +14,16 @@ def get_client_tag_value(config):
 def format_email_content(config, start_date=None, end_date=None):
     """Formatea el contenido del correo reemplazando las variables."""
     if start_date is None or end_date is None:
-        # Si no se proporcionan fechas, usar el mes anterior
         today = datetime.now()
         start_date = (today.replace(day=1) - timedelta(days=1)).replace(day=1).strftime("%Y-%m-%d")
         end_date = (today.replace(day=1) - timedelta(days=1)).strftime("%Y-%m-%d")
+    elif isinstance(start_date, str) and isinstance(end_date, str):
+        # Las fechas ya están en formato string, no necesitan conversión
+        pass
+    else:
+        # Convertir las fechas a string si no lo están
+        start_date = start_date.strftime("%Y-%m-%d")
+        end_date = end_date.strftime("%Y-%m-%d")
 
     # Obtener los tipos de items desde la configuración
     item_types = ", ".join(config['ITEM_KEYS'].keys())
