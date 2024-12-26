@@ -1,33 +1,27 @@
 # Generador de Reportes de Zabbix
-
 Este proyecto genera reportes CSV con información detallada sobre el uso de recursos (CPU, memoria, sistema de archivos) en servidores monitoreados por Zabbix. El reporte incluye estadísticas como el porcentaje de uso y el espacio utilizado, y puede enviarse por correo electrónico automáticamente.
 
 ## Requisitos
-
 1. Python 3.x
 2. Zabbix con API habilitada
 3. Dependencias Python:
    - requests
-   - smtplib
-   - email
+   - python-dateutil
+   - numpy
 
 ## Instalación
-
 1. Clona el repositorio:
     ```bash
-    git clone https://github.com/tu_usuario/zabbix-report-generator.git
-    cd zabbix-report-generator
+    git clone https://github.com/grovertaipe/ZBX-REPORT-CSV.git
+    cd ZBX-REPORT-CSV
     ```
-
 2. Instala las dependencias necesarias:
     ```bash
     pip install -r requirements.txt
     ```
-
 3. Configura tu archivo `config.json` con los detalles de tu servidor Zabbix, credenciales de correo y parámetros de los ítems a monitorear.
 
 ## Uso
-
 1. Modifica el archivo `config.json` para incluir:
    - La URL de tu servidor Zabbix y el token de autenticación.
    - Las claves de los ítems a monitorear (`filesystem`, `memory`, `cpu`).
@@ -38,12 +32,11 @@ Este proyecto genera reportes CSV con información detallada sobre el uso de rec
     ```bash
     python main.py config.json --start_date YYYY-MM-DD --end_date YYYY-MM-DD --report_name reporte_personalizado
     ```
-
-   - **start_date** y **end_date** son opcionales, si no se proporcionan, el reporte tomará el mes anterior por defecto.
-   - **report_name** es opcional, si no se proporciona, se utilizará el nombre por defecto en el archivo de configuración.
+   - **start_date** y **end_date** son opcionales. Si no se proporcionan, el reporte tomará el mes anterior por defecto.
+   - **report_name** es opcional. Si no se proporciona, se utilizará el nombre por defecto del archivo de configuración.
+   - Las fechas especificadas se utilizarán tanto para generar el reporte como para el asunto y cuerpo del correo electrónico.
 
 ## Ejemplo de Configuración
-
 ```json
 {
     "ZABBIX_URL": "http://tu_servidor_zabbix/api_jsonrpc.php",
@@ -76,7 +69,7 @@ Este proyecto genera reportes CSV con información detallada sobre el uso de rec
         "sender": "tu_correo@tudominio.com",
         "recipients": ["destinatario1@ejemplo.com", "destinatario2@ejemplo.com"],
         "cc": ["destinatario1@ejemplo.com", "destinatario2@ejemplo.com"],
-        "subject": "Reporte de Zabbix - {start_date} a {end_date}",
+        "subject": "Reporte de Zabbix - Cliente {client} - {start_date} a {end_date}",
         "body": "Estimado/a,\n\nAdjunto encontrarás el reporte de Zabbix generado para el período del {start_date} al {end_date}.\n\nEste reporte incluye información sobre {item_types} para los hosts monitoreados.\n\nSi tienes alguna pregunta o necesitas información adicional, no dudes en contactarnos.\n\nSaludos cordiales,\nEquipo de Monitoreo",
         "smtp_server": "smtp.tudominio.com",
         "smtp_port": 587,
@@ -86,3 +79,4 @@ Este proyecto genera reportes CSV con información detallada sobre el uso de rec
         "password": "tu_contraseña_segura"
     }
 }
+```
